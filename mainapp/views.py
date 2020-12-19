@@ -1,5 +1,5 @@
 from mainapp.forms import SignupForm
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -14,12 +14,18 @@ class EmpresaCreate(CreateView):
     success_url = reverse_lazy('home')
     template_name = 'mainapp/empresa_form.html'
 
+class EmpresaUpdateView(UpdateView):
+    model = Empresa
+    template_name = "mainapp/empresa_form.html"
+    success_url = reverse_lazy('home')
+
+class EmpresaDeleteView(DeleteView):
+    model = Empresa
+    template_name = "mainapp/empresa_form.html"
+    success_url = reverse_lazy('home')
+
 def index(request):
     return render(request, 'index.html', {})
-
-def home(request):
-    return render(request, 'home.html',{})
-
 
 def signup(request):
     if request.method == 'POST':
@@ -35,3 +41,7 @@ def signup(request):
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
 
+def listar_empresa(request):
+    empresas = Empresa.objects.all()
+    print(empresas)
+    return render(request, 'home.html', {'empresas': empresas})

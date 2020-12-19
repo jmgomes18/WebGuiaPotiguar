@@ -2,10 +2,30 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <a href="{% url 'registro_empresa' %}">Cadastre sua empresa</a>
+Hi {{ user.username }}!
+<a href="{% url 'registro_empresa' %}">Cadastre sua empresa</a>
+
+<div>
+  <table>
+    <tr>
+      <th>Razão Social</th>
+      <th>Cidade</th>
+      <th>Estado</th>
+    </tr>
+
+      {% for empresa in empresas %}
+      <tr>
+        <td>{{empresa.razao_social}}</td>
+        <td>{{empresa.cidade}}</td>
+        <td>{{empresa.estado}}</td>
+      </tr>
+    
+    {% endfor %}
+  </table>
+  
+</div>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
 {% endif %}
 {% endblock %}

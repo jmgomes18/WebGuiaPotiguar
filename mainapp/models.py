@@ -18,6 +18,6 @@ class Empresa(models.Model):
     def get_absolute_url(self):
         return reverse('registro_empresa', kwargs={'pk': self.pk})
 
-    def __str__(self):
+    def __str__(self):      
         return self.razao_social
     
