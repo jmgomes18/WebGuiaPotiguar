@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Empresa Form</h1>
+    <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" value="Save">Cadastrar Empresa</button>
+</form>
+{% endblock content %}
