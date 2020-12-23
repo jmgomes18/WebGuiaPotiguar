@@ -11,10 +11,17 @@ from django.urls import reverse, reverse_lazy
 
 # Create your views here.
 
+
+
 class EmpresaCreate(CreateView):
     model = Empresa
     fields = ["razao_social","cnpj","email","endereco","cidade","estado",]
     success_url = reverse_lazy('empresa_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class EmpresaUpdateView(UpdateView):
     model = Empresa
@@ -51,4 +58,5 @@ def signup(request):
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
+
 

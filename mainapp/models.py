@@ -10,7 +10,7 @@ class Empresa(models.Model):
     endereco = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
     estado = models.CharField(max_length=50)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user  = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Empresa'
@@ -21,5 +21,6 @@ class Empresa(models.Model):
 
     def get_absolute_url(self):
         return reverse('empresa_update', kwargs={'pk': self.pk})
+
 
     
