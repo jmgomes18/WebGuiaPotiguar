@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% block content %}
 
-{% block 'content' %}
+    <h1>{{empresa.razao_social}}</h1>
 
-<h1>{{object.razao_social}}</h1>
+    <h3>{{empresa.get_categoria_display}}</h3>
 
-{% endblock 'content' %}
+    <h2>{{empresa.descricao}}</h2>
 
+{% endblock content %}

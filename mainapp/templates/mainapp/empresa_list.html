@@ -10,6 +10,7 @@ Hi {{ user.first_name }}!
     {% for empresa in empresa_list %}
       <li>
         <a href="{{ empresa.get_absolute_url }}">{{ empresa.razao_social }}</a> ({{empresa.cnpj}})
+        <span><a href="{% url 'empresa_detail' pk=empresa.id%}">Página da Empresa</a></span>
       </li>
     {% endfor %}
   </ul>

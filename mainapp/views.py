@@ -9,9 +9,6 @@ from .models import Empresa
 from django.utils import timezone
 from django.urls import reverse, reverse_lazy
 
-# Create your views here.
-
-
 
 class EmpresaCreate(CreateView):
     model = Empresa
@@ -25,7 +22,7 @@ class EmpresaCreate(CreateView):
 
 class EmpresaUpdateView(UpdateView):
     model = Empresa
-    fields = ["razao_social","cnpj","email","endereco","cidade","estado",]
+    fields = ["razao_social","cnpj","email","endereco","cidade","estado", 'descricao', 'categoria']
     success_url = reverse_lazy('empresa_list')
 
 class EmpresaDeleteView(DeleteView):
@@ -36,10 +33,11 @@ class EmpresaListView(ListView):
     model = Empresa
 
     def get_queryset(self):
-        return Empresa.objects.filter(user=self.request.user)
+        return Empresa.objects.filter(user=self.request.user)   
     
 class EmpresaDetailView(DetailView):
     model = Empresa
+
     
 
 def index(request):
