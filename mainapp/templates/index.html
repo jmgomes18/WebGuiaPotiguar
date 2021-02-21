@@ -1,11 +1,70 @@
-{% load static %}
-<html>
-<head>
-    Web Guia Potiguar
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <a href="{% url 'login' %}">Faça Login</a>
-</body>
+{% block body %}
 
-</html>
+
+{% block content %}
+
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-9 text-center">
+                <h1>Web Guia Potiguar</h1>
+                <h2>A sua vitrine digital. Trazendo o mundo para mais próximo do seu negócio</h2>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        </div>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                {% for empresa in categorias %}
+                {% if forloop.first %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                {% else %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}"></li>
+
+                {% endif %}
+                {% endfor %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                {% for empresa in categorias %}
+                {% if forloop.first %}
+                <div class="carousel-item active  ">
+                    {% else %}
+                    <div class="carousel-item  ">
+                        {% endif %}
+                            <div class="col-md-6 col-lg-3 d-flex" data-aos="zoom-in"
+                                data-aos-delay="200">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="ri-stack-line"></i></div>
+                                    <h4 class="title"><a href="">{{empresa.get_categoria_display}}</a></h4>
+                                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas
+                                        molestias excepturi</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+</section>
+
+{% include 'sections/clients_section.html' %}
+
+{% endblock content %}
+
+{% endblock body %}

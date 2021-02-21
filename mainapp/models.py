@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 class Empresa(models.Model):
-
         
     CATEGORIA_CHOICES = (
         ('AL','ALIMENTAÇÃO E BEBIDAS'),

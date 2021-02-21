@@ -3,11 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from .models import Empresa
-from django.utils import timezone
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 
 
 class EmpresaCreate(CreateView):
@@ -25,23 +22,26 @@ class EmpresaUpdateView(UpdateView):
     fields = ["razao_social","cnpj","email","endereco","cidade","estado", 'descricao', 'categoria']
     success_url = reverse_lazy('empresa_list')
 
+
 class EmpresaDeleteView(DeleteView):
     model = Empresa
     success_url = reverse_lazy('empresa_list')
 
+
 class EmpresaListView(ListView):
     model = Empresa
+    template_name = 'mainapp/empresa_list'
 
     def get_queryset(self):
-        return Empresa.objects.filter(user=self.request.user)   
-    
+        return Empresa.objects.filter(user=self.request.user)
+
 class EmpresaDetailView(DetailView):
     model = Empresa
 
-    
-
 def index(request):
-    return render(request, 'index.html', {})
+    categorias = Empresa.objects.all().distinct()
+    return render(request, 'index.html', {'categorias': categorias})
+
 
 def signup(request):
     if request.method == 'POST':

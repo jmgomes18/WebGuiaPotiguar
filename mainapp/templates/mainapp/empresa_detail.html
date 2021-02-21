@@ -1,10 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>{{empresa.razao_social}}</h1>
+    <div class="col-lg-8 mt-5 mt-lg-0" style="padding-top: 100px">
 
-    <h3>{{empresa.get_categoria_display}}</h3>
+    <h2 class="display-4">{{empresa.razao_social}}</h2>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-categoria" role="tab" aria-controls="profile">Categoria</a>
+            <a class="list-group-item list-group-item-action"  id="list-messages-list" data-toggle="list" href="#list-descricao" role="tab" aria-controls="messages">Descrição</a>
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-produtos" role="tab" aria-controls="home">Produtos</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-categoria" role="tabpanel" aria-labelledby="list-home-list">{{empresa.get_categoria_display}}</div>
+            <div class="tab-pane fade text-justify" id="list-descricao" role="tabpanel" aria-labelledby="list-profile-list">{{empresa.descricao}}</div>
+            <div class="tab-pane fade" id="list-produtos" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+            </div>
+        </div>
+    </div>
 
-    <h2>{{empresa.descricao}}</h2>
+    </div>
 
 {% endblock content %}

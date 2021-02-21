@@ -1,24 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if user.is_authenticated %}
-Hi {{ user.first_name }}!
-<a href="{% url 'empresa_form' %}">Cadastre sua empresa</a>
-<h1>Listagem de Empresas</h1>
-  {% if empresa_list %}
-  <ul>
-    {% for empresa in empresa_list %}
-      <li>
-        <a href="{{ empresa.get_absolute_url }}">{{ empresa.razao_social }}</a> ({{empresa.cnpj}})
-        <span><a href="{% url 'empresa_detail' pk=empresa.id%}">Página da Empresa</a></span>
-      </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <p>There are no books in the library.</p>
-  {% endif %} 
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a>
-{% endif %}
+
+    {% if user.is_authenticated %}
+      Hi {{ user.first_name }}!
+      <a href="{% url 'empresa_form' %}">Cadastre sua empresa</a>
+      <h1>Listagem de Empresas</h1>
+
+      {% if empresa_list %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome da Empresa</th>
+              <th>CNPJ</th>
+              <th>Página da Empresa</th> 
+            </tr>
+          </thead>
+          
+          <tbody>
+            {% for empresa in empresa_list %}
+            <tr>
+              <td><a href="{{ empresa.get_absolute_url }}">{{ empresa.razao_social }}</a></td>
+              <td>{{empresa.cnpj}}</td>
+              <td><a href="{% url 'empresa_detail' pk=empresa.id%}">Página da Empresa</a></td>
+            </tr>  
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+          <p>Suas empresas ainda não foram cadastradas.</p>
+        {% endif %} 
+
+    {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
 {% endblock %}
