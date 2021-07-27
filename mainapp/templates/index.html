@@ -20,13 +20,14 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 {% for empresa in categorias %}
-                {% if forloop.first %}
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="active"></li>
-                {% else %}
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}"></li>
+                    {% if forloop.first %}
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="active"></li>
+                    {% else %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}"></li>
 
-                {% endif %}
+                    {% endif %}
                 {% endfor %}
+
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
@@ -41,8 +42,7 @@
                                 <div class="icon-box">
                                     <div class="icon"><i class="ri-stack-line"></i></div>
                                     <h4 class="title"><a href="">{{empresa.get_categoria_display}}</a></h4>
-                                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas
-                                        molestias excepturi</p>
+                                    <p class="description">{{empresa.razao_social}}</p>
                                 </div>
                             </div>
                         </div>

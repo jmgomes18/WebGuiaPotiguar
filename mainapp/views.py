@@ -57,4 +57,3 @@ def signup(request):
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
 
-
